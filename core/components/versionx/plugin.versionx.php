@@ -22,9 +22,9 @@
  * @package versionx
  */
 /*
- * Installation instructions:
- * - Upload the core and assets folder to the related folder on your server
- * - 
+ * This file's content should be added to the VersionX plugin within MODx
+ * System events:
+ * - OnDocFormSave
  */
   $eventName = $modx->event->name;
   switch($eventName) {
