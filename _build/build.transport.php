@@ -9,7 +9,12 @@ $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
-set_time_limit(0); /* makes sure our script doesnt timeout */
+set_time_limit(0);
+
+define('PKG_NAME','VersionX');
+define('PKG_NAME_LOWER','versionx');
+define('PKG_VERSION','1.0');
+define('PKG_RELEASE','alpha');
 
 $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
@@ -20,130 +25,131 @@ $sources= array (
     'source_core' => $root.'core/components/versionx',
     'lexicon' => $root . 'core/components/versionx/lexicon/',
     'source_assets' => $root.'assets/components/versionx',
-    //'docs' => $root.'core/components/versionx/docs/',
 );
-unset($root); /* save memory */
+unset($root); 
 
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 
 $modx= new modX();
 $modx->initialize('mgr');
-$modx->setLogLevel(MODX_LOG_LEVEL_INFO);
+echo '<pre>';
+$modx->setLogLevel(modX::LOG_LEVEL_INFO);
 $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('versionx','1.0','alpha1');
-$builder->registerNamespace('versionx',false,true,'{core_path}components/versionx/');
+$builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
+$builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
 
-/* load action/menu */
-$action = include $sources['data'].'transport.actions.php';
+/* create the plugin object */
+$plugin= $modx->newObject('modPlugin');
+$plugin->set('id',1);
+$plugin->set('name', PKG_NAME);
+$plugin->set('description', PKG_NAME.' '.PKG_VERSION.'-'.PKG_RELEASE.' Simple versioning plugin.');
+$plugin->set('plugincode', file_get_contents($sources['data'] . '/plugin.versionx.php'));
+$plugin->set('category', 0);
 
-$vehicle= $builder->createVehicle($action,array (
+$evs = array(
+    'OnDocFormSave',
+);
+
+foreach ($evs as $ev) {
+    $events[(string)$ev] = $modx->newObject('modPluginEvent');
+    $events[(string)$ev]->fromArray(array(
+        'event' => (string)$ev,
+        'priority' => 0,
+        'propertyset' => 0,
+    ),'',true,true);
+}
+	
+if (is_array($events)) {
+    $plugin->addMany($events);
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events!');
+}
+
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'name',
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
     xPDOTransport::RELATED_OBJECTS => true,
     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'Menus' => array (
+        'PluginEvents' => array(
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+        ),
+    ),
+);
+
+$vehicle = $builder->createVehicle($plugin, $attributes);
+
+$vehicle->resolve('file',array(
+    'source' => $sources['source_assets'],
+    'target' => "return MODX_ASSETS_PATH . 'components/';",
+));
+
+$vehicle->resolve('file',array(
+    'source' => $sources['source_core'],
+    'target' => "return MODX_CORE_PATH . 'components/';",
+));
+
+$builder->putVehicle($vehicle);
+
+/*$builder->setPackageAttributes(array(
+    'license' => file_get_contents($sources['docs'] . 'license.txt'),
+    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+));
+$modx->log(xPDO::LOG_LEVEL_INFO,'Set Package Attributes.'); flush();*/
+
+
+
+
+
+
+$action= $modx->newObject('modAction');
+$action->fromArray(array(
+    'id' => 1,
+    'namespace' => 'versionx',
+    'parent' => 0,
+    'controller' => 'index',
+    'haslayout' => 1,
+    'lang_topics' => 'versionx:default',
+    'assets' => '',
+),'',true,true);
+
+/* load menu into action */
+$menu= $modx->newObject('modMenu');
+$menu->fromArray(array(
+    'parent' => 'components',
+    'text' => 'versionx.versionx',
+    'description' => 'versionx.menuDesc',
+    'icon' => '',
+    'menuindex' => '0',
+    'params' => '',
+    'handler' => '',
+),'',true,true);
+$menu->addOne($action);
+
+$vehicle= $builder->createVehicle($menu,array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => 'text',
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'Action' => array (
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => array ('action', 'text'),
+            xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
         ),
     ),
 ));
 $builder->putVehicle($vehicle);
 unset($vehicle,$action);
 
-/* load system settings
-$settings = array();
-include_once $sources['data'].'transport.settings.php';
-
-$attributes= array(
-    xPDOTransport::UNIQUE_KEY => 'key',
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($settings as $setting) {
-    $vehicle = $builder->createVehicle($setting,$attributes);
-    $builder->putVehicle($vehicle);
-}
-unset($settings,$setting,$attributes);*/
 
 
-/* create category */
-$category= $modx->newObject('modCategory');
-$category->set('id',1);
-$category->set('category','VersionX');
-
-$plugins = array();
-$plugins[0] = $modx->newObject('modPlugin');
-$plugins[0]->set('id',1);
-$plugins[0]->set('name','VersionX');
-$plugins[0]->set('description','Manages storing revisions in your website.');
-$plugins[0]->set('plugincode', 'just to make sure it aint empty'.file_get_contents($sources['source_core'] . '/plugin.versionx.php'));
-$plugins[0]->set('category', 1);
-$events = array(); // include $sources['events'].'events.quipresourcecleaner.php';
-$events['OnDocFormSave']= $modx->newObject('modPluginEvent');
-$events['OnDocFormSave']->fromArray(array(
-    'event' => 'OnDocFormSave',
-    'priority' => 0,
-    'propertyset' => 0,
-),'',true,true);
-if (is_array($events) && !empty($events)) {
-    $plugins[0]->addMany($events);
-    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events for VersionX.'); flush();
-} else {
-    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events for QuipResourceCleaner!');
-}
-unset($events);
-
-/* add chunks */
-/*$chunks = include $sources['data'].'transport.chunks.php';
-if (is_array($chunks)) {
-    $category->addMany($chunks);
-} else { $modx->log(MODX_LOG_LEVEL_FATAL,'Adding chunks failed.'); }*/
-
-/* create category vehicle */
-$attr = array(
-    xPDOTransport::UNIQUE_KEY => 'category',
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'modPlugin' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => 'name',
-        ),
-    )
-);
-$vehicle = $builder->createVehicle($category,$attr);
-$vehicle->resolve('file',array(
-    'source' => $sources['source_core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
-));
-$vehicle->resolve('file',array(
-    'source' => $sources['source_assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
-/*$vehicle->resolve('php',array(
-    'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
-));*/
-$builder->putVehicle($vehicle);
-
-/* load lexicon strings */
-$builder->buildLexicon($sources['lexicon']);
-
-/* now pack in the license file, readme and setup options */
-$builder->setPackageAttributes(array(
-    'license' => 'GNU you-know-what.', //file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => 'No promises for anything. But you know that right?', //file_get_contents($sources['docs'] . 'readme.txt'),
-    /*'setup-options' => array(
-        'source' => $sources['build'].'setup.options.php',
-    ),*/
-));
 
 $builder->pack();
 

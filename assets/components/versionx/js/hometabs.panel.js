@@ -328,10 +328,9 @@ VersionX.grid.Resources.CompareContent = function(config) {
     config = config || {};
     //this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        //url: '../assets/components/versionx/connector.php'
-		  url: '../core/components/versionx/processors/mgr/hometabs/compareResourcesContent.php'
+        url: MODx.config.assets_url+'components/versionx/connector.php'
 		  ,id: 'resourcecomparecontentgrid'
-		  ,baseParams: { old: fromRev, new: newRev }
+		  ,baseParams: { action: 'compareResourcesContent', old: fromRev, new: newRev }
         ,fields: ["oldvalue","newvalue","change"]
         ,paging: false
         ,autosave: false

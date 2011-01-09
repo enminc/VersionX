@@ -22,7 +22,6 @@
  * @package versionx
  * @subpackage processors
  */
-
 	$rev = $_POST['revision'];
 	
 	// Include the MODx object
@@ -35,7 +34,6 @@
 			'error' => 1,
 			'message' => 'Revision is not numeric')));
 	}
-		
 	// Load up VersionX
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
@@ -45,7 +43,6 @@
 			'error' => 1,
 			'message' => 'Unable to fetch the VersionX model.')));
 	}
-	
 	// Fetch the revision data
 	$revObj = $modx->getObject('Versionx',$rev);
 	if ($revObj == '') { die(json_encode(array(
@@ -57,7 +54,6 @@
 		'parent', 'isfolder', 'introtext', 'richtext', 'template', 'menuindex', 'searchable', 'cacheable', 'createdby', 'createdon', 'deleted',
 		'deletedon', 'deletedby', 'publishedon', 'publishedby', 'menutitle', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo',
 		'hidemenu', 'context_key', 'content_type'); //Excludes: fromRev, revision, contentField, editedby, editedon, time, class
-	
 	$resID = $revObj->get('id');
 	$newRev = $modx->newObject('Versionx');
 	$resource = $modx->getObject('modResource',$resID);
@@ -65,7 +61,7 @@
 		$newRev->set($field,$revObj->get($field));
 		$resource->set($field,$revObj->get($field));
 	}
-	
+
 	// @@ 4/1/2011
 	$vX_findlastrev = $modx->newQuery('Versionx');
 	$vX_findlastrev->where(array(

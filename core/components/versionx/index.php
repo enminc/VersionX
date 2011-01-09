@@ -32,7 +32,6 @@
 	$assetsUrl = $modx->getOption('versionx.assets_url',null,$modx->getOption('assets_url').'components/versionx/');
 	$modx->regClientStartupScript($assetsUrl.'js/versionx.js');
 	$modx->regClientStartupScript($assetsUrl.'js/hometabs.panel.js');
-	$modx->regClientStartupScript($assetsUrl.'js/home.js');
 	
 	// Declare the package to use xPDO objects in the CMP.
 	$path = MODX_CORE_PATH . 'components/versionx/model/';

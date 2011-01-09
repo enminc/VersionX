@@ -1,6 +1,6 @@
 <?php
 /*
- * VersionX
+ * VersionX 1.0-alpha1
  *
  * Copyright 2010-2011 by Mark Hamstra (contact via www.markhamstra.nl)
  *
@@ -21,17 +21,15 @@
  *
  * @package versionx
  */
-require_once dirname(dirname(dirname(dirname(__FILE__)))).'/config.core.php';
-require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
-require_once MODX_CONNECTORS_PATH.'index.php';
-$modx = new modX();  
-$modx->initialize('web'); 
-$corePath = $modx->config['core_path'].'components/versionx/';
-
-$modx->addPackage('versionx', $corePath.'model/');
-
-// Something's going wrong with the request... 
-$modx->request->handleRequest(array(
-    'processors_path' => $corePath.'processors/',
-    'location' => '',
-));
+/*
+ * Installation instructions:
+ * - Upload the core and assets folder to the related folder on your server
+ * - 
+ */
+  $eventName = $modx->event->name;
+  switch($eventName) {
+    case 'OnDocFormSave':
+		define('versionx',true);
+      include_once($modx->getOption('core_path').'components/versionx/plugin.inc.php');
+      break;
+  }
