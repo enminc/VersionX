@@ -37,7 +37,7 @@ $_lang[$vxp.'overviewTitle'] = 'Overview';
 $_lang[$vxp.'overviewDescription'] = 'VersionX keeps record of all your changes in Resources, Chunks and Snippets and offers a one-click option to restore an old revision. On the Overview tab you will find the last three revisions per section. Visit the relative tabs for more detailed information and options.';
 $_lang[$vxp.'devTitle'] = 'Development';
 $_lang[$vxp.'devDescription'] = 'VersionX has been developed by <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> as a simple versioning addon for <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a>. 
-	Please report any bugs or unexpected behaviour at <a href="http://www.markhamstra.nl/modx/addons/versionx/bugs-1.0-alpha.html" title="VersionX 1.0-alpha bugs">my blog</a> for now.';
+	Please report any bugs or unexpected behaviour at <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
 	
 // CMP: Resources
 $_lang[$vxp.'resourcesTitle'] = 'Resources';
