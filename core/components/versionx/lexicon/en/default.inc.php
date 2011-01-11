@@ -21,10 +21,12 @@
  *
  * @package versionx
  * @subpackage lexicon-en
- */
- $vxp = 'versionx.'; // I'm lazy, I know.
- 
-// Translation last updated: 4/1/2010
+ * @author Mark Hamstra 
+ * @date 2011-01-04
+ * 
+*/
+
+$vxp = 'versionx.'; // I'm lazy, I know.
 
 // Global 
 $_lang[$vxp.'versionx'] = 'VersionX';
@@ -77,7 +79,6 @@ $_lang[$vxp.'grid.class'] = 'Class';
 $_lang[$vxp.'grid.time'] = 'Time';
 $_lang[$vxp.'grid.editor'] = 'Editor';
 
-
 // CMP: Grid context menu
 $_lang[$vxp.'grid.details'] = 'View details';
 $_lang[$vxp.'grid.compare'] = 'Compare';
@@ -85,11 +86,5 @@ $_lang[$vxp.'grid.restore'] = 'Restore';
 $_lang[$vxp.'grid.restoreTitle'] = 'Restore revision';
 $_lang[$vxp.'grid.restoreMsg'] = 'Are you sure you want to revert the resource to the selected revision?';
 $_lang[$vxp.'grid.restore.done'] = 'The specified revision has been restored.';
-
-
-
-
-
-
 
 ?>
