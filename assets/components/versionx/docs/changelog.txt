@@ -1,6 +1,7 @@
 CHANGELOG VERSIONX
 
-VersionX 1.0 Alpha2
+VersionX 1.0 Alpha2 (Released 11/01/2011)
+- [#9] Added readme & license
 - [#8] General improvement lexicon (smooth-graphics)
 - Fixed fatal IE issue (breaking on "class" and "new")
 - Fixed fatal issue when a new resource has been created.
