@@ -1,0 +1,5 @@
+CHANGELOG VERSIONX
+
+VersionX 1.0 Alpha2
+- Fixed issue with newly created resources. Because "editedby" was empty, the getList processor would get a fatal error "attempting to use getOne() on a non-object".
+- [#3] Added german translation
