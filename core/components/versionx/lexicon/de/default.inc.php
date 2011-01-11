@@ -3,6 +3,7 @@
  * VersionX
  *
  * Copyright 2010-2011 by Mark Hamstra (contact via www.markhamstra.nl)
+ * Credit for german translation to Anselm Hannemann (contact via www.anselm-hannemann.de)
  *
  * This file is part of VersionX, a basic versioning addon for MODx CMF.
  *
@@ -18,40 +19,40 @@
  * You should have received a copy of the GNU General Public License along with
  * VersionX; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- *
+ * 
  * @package versionx
- * @subpackage lexicon-en
- */
- $vxp = 'versionx.'; // I'm lazy, I know.
- 
-// Translation last updated: 11/1/2010
-// German translation by Anselm Hannemann ( http://www.anselm-hannemann.de )
+ * @subpackage lexicon-de
+ * @author Anselm Hannemann
+ * @date 2011-01-11
+ * 
+*/
+
+$vxp = 'versionx.'; // I'm lazy, I know.
 
 // Global 
 $_lang[$vxp.'versionx'] = 'VersionX';
 
 // Manager: Component menu
-$_lang[$vxp.'menuDesc'] = 'Komponente für Inhalts-Versionierung';
+$_lang[$vxp.'menuDesc'] = 'Komponente für Inhalt-Versionierung';
 
 // CMP: Overview
 $_lang[$vxp.'overviewTitle'] = 'Übersicht';
-$_lang[$vxp.'overviewDescription'] = 'VersionX überwacht alle Änderungen in den Ressourcen, Chunks und Snippets. Es bietet die Möglichkeit mit einem Klick alte Versionen wiederherzustellen. Im Übersichts Reiter finden Sie die letzten 3 Änderunden der Ressourcen. Für detaillierte Informationen sowie die Optionen wechseln Sie in den Reiter der gewünschten Ressourcengruppe.';
+$_lang[$vxp.'overviewDescription'] = 'VersionX überwacht sämtliche Änderungen in Ressourcen, Chunks und Snippets. Es bietet die Möglichkeit ältere Versionen per One-Click wiederherzustellen und Versionen zu vergleichen.<br>Im Reiter &raquo;Übersicht&laquo; finden Sie die letzten 3 Änderunden der Ressourcen pro Sektion. Für detaillierte Informationen sowie die Optionen wechseln Sie in den Reiter der gewünschten Ressourcengruppe.';
 $_lang[$vxp.'devTitle'] = 'Entwicklung';
-$_lang[$vxp.'devDescription'] = 'VersionX wurde von <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> als einfaches versionierungs Addon für<a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a> entwickelt. 
-	Bitte melden Sie sämtliche Bugs oder unerwartetes Verhalten sowie Feature-Requests im <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github Repository</a>.';
+$_lang[$vxp.'devDescription'] = 'VersionX wurde von <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> als einfaches Versionierungs-Addon für <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a> entwickelt.<br>Bitte melden Sie sämtliche Bugs, unerwartetes Verhalten oder Feature-Requests im <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github Repository</a>.';
 	
 // CMP: Resources
 $_lang[$vxp.'resourcesTitle'] = 'Ressourcen';
-$_lang[$vxp.'resourcesDescription'] = 'VersionX verfolgt die wichtigsten Daten - sämtliche Inhalte.';
+$_lang[$vxp.'resourcesDescription'] = 'VersionX erfasst sämtliche Änderungen an Ihren Inhalten.';
 
 //// Resource detail window
 $_lang[$vxp.'detailwindow.title'] = 'Ressourcen Änderung';
-$_lang[$vxp.'detailwindow.basictab'] = 'Standard Felder';
-$_lang[$vxp.'detailwindow.settingstab'] = 'Einstellungen';
+$_lang[$vxp.'detailwindow.basictab'] = 'Dokument Felder';
+$_lang[$vxp.'detailwindow.settingstab'] = 'Seiteneinstellungen';
 
 //// Resource compare window
 //$_lang[$vxp.'resources.comparewindow.title'] = ''; 
-$_lang[$vxp.'comparewindow.fieldstab'] = 'Felder &amp; Einstellungen'; 
+$_lang[$vxp.'comparewindow.fieldstab'] = 'Felder &amp; Seiteneinstellungen'; 
 $_lang[$vxp.'comparewindow.contenttab'] = 'Inhalt';
 $_lang[$vxp.'comparewindow.fields.field'] = 'Feld';
 $_lang[$vxp.'comparewindow.fields.old'] = 'alt';
@@ -68,29 +69,22 @@ $_lang[$vxp.'snippetsDescription'] = 'Änderungen an Snippets können es schnell
 
 // CMP: Grid headings
 $_lang[$vxp.'grid.revNum'] = '#';
-$_lang[$vxp.'grid.docID'] = 'Res. ID';
+$_lang[$vxp.'grid.docID'] = 'Ressource ID';
 $_lang[$vxp.'grid.mode'] = 'Modus';
 $_lang[$vxp.'grid.mode.upd'] = 'geändert';
 $_lang[$vxp.'grid.mode.new'] = 'erstellt';
-$_lang[$vxp.'grid.mode.rev'] = 'wiederhergestellt (';
-$_lang[$vxp.'grid.fromRev'] = 'Vorher';
+$_lang[$vxp.'grid.mode.rev'] = 'wiederhergestellt';
+$_lang[$vxp.'grid.fromRev'] = 'vorherige Version';
 $_lang[$vxp.'grid.class'] = 'Klasse';
-$_lang[$vxp.'grid.time'] = 'Zeit';
+$_lang[$vxp.'grid.time'] = 'Datum';
 $_lang[$vxp.'grid.editor'] = 'Editor';
-
 
 // CMP: Grid context menu
 $_lang[$vxp.'grid.details'] = 'Details ansehen';
 $_lang[$vxp.'grid.compare'] = 'Vergleichen';
 $_lang[$vxp.'grid.restore'] = 'Wiederherstellen';
 $_lang[$vxp.'grid.restoreTitle'] = 'Version wiederherstellen';
-$_lang[$vxp.'grid.restoreMsg'] = 'Sind Sie sicher, dass Sie die aktuelle Ressource mit der gewählten älteren Version ersetzen möchten?';
+$_lang[$vxp.'grid.restoreMsg'] = 'Sind Sie sicher, dass Sie diese Ressource mit der gewählten (evtl. veralteten) Version ersetzen möchten?';
 $_lang[$vxp.'grid.restore.done'] = 'Die ausgewählte Version wurde wiederhergestellt.';
-
-
-
-
-
-
 
 ?>

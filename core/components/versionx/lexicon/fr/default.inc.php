@@ -3,6 +3,7 @@
  * VersionX
  *
  * Copyright 2010-2011 by Mark Hamstra (contact via www.markhamstra.nl)
+ * Credit for french translation to rtripault
  *
  * This file is part of VersionX, a basic versioning addon for MODx CMF.
  *
@@ -21,11 +22,12 @@
  *
  * @package versionx
  * @subpackage lexicon-fr
- * @author rtripault (4/1/2011)
- */
- $vxp = 'versionx.'; // I'm lazy, I know.
- 
-// Translation last updated: 4/1/2010
+ * @author rtripault
+ * @date 2011-01-04
+ *
+*/
+
+$vxp = 'versionx.'; // I'm lazy, I know.
 
 // Global 
 $_lang[$vxp.'versionx'] = 'VersionX';
@@ -78,7 +80,6 @@ $_lang[$vxp.'grid.class'] = 'Classe';
 $_lang[$vxp.'grid.time'] = 'Date';
 $_lang[$vxp.'grid.editor'] = 'Édité par';
 
-
 // CMP: Grid context menu
 $_lang[$vxp.'grid.details'] = 'Voir les détails';
 $_lang[$vxp.'grid.compare'] = 'Comparer';
@@ -86,11 +87,5 @@ $_lang[$vxp.'grid.restore'] = 'Restorer';
 $_lang[$vxp.'grid.restoreTitle'] = 'Restorer la version';
 $_lang[$vxp.'grid.restoreMsg'] = 'Êtes-vous sûr de vouloir remplacer la ressource par la version sélectionnée?';
 $_lang[$vxp.'grid.restore.done'] = 'La version a été restorée.';
-
-
-
-
-
-
 
 ?>
