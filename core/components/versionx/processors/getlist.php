@@ -66,8 +66,9 @@
 		$resArray['time'] = date($dateFormat,$rev->get('time')); // Format the time in php
 		$resArray['editedby'] = $name; // Replace the user id with the fullname from the db, collected above
 		$resArray['fromRev'] = ($resArray['fromRev'] > 0) ? $resArray['fromRev'] : '';  // If fromRev = 0, set it to ''
-		$resArray['contentField'] = nl2br($resArray['contentField']); // To show line fields in the revision
-
+		$resArray['contentField'] = nl2br($resArray['contentField']); // To show line breaks in the revision
+		$resArray['classKey'] = $resArray['class']; unset($resArray['class']); // IE breaks on "class".
+		
 		$list[] = $resArray;
 	}
 	$outputArray['total'] = $count;

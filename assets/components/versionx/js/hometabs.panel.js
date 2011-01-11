@@ -230,7 +230,7 @@ function resourcewindow(g, eventObj, row) {
 			},{
 				title: _('versionx.detailwindow.settingstab') //'Settings'
 				,bodyStyle: 'padding: 10px'
-				,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.class+'</td></tr></table>'
+				,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.classKey+'</td></tr></table>'
 			}]
 		}] 
 	});
@@ -285,7 +285,7 @@ VersionX.grid.Resources.Compare = function(config) {
         url: MODx.config.assets_url+'components/versionx/connector.php'
 		  //url: '../core/components/versionx/processors/mgr/hometabs/compareResources.php'
 		  ,id: 'resourcecomparegrid'
-		  ,baseParams: { action: 'compareResources', old: fromRev, new: newRev }
+		  ,baseParams: { 'action': 'compareResources', 'old': fromRev, 'new': newRev }
         ,fields: ["field","oldvalue","newvalue"]
         ,paging: false
         ,autosave: false
@@ -330,7 +330,7 @@ VersionX.grid.Resources.CompareContent = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.assets_url+'components/versionx/connector.php'
 		  ,id: 'resourcecomparecontentgrid'
-		  ,baseParams: { action: 'compareResourcesContent', old: fromRev, new: newRev }
+		  ,baseParams: { action: 'compareResourcesContent', 'old': fromRev, 'new': newRev }
         ,fields: ["oldvalue","newvalue","change"]
         ,paging: false
         ,autosave: false
