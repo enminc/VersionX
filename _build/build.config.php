@@ -5,5 +5,5 @@
  * @package quip
  * @subpackage build
  */
-define('MODX_CORE_PATH', 'H:\xampp\htdocs\versionx/core/');
+define('MODX_CORE_PATH', 'H:\xampp\htdocs\clean/core/');
 define('MODX_CONFIG_KEY','config');

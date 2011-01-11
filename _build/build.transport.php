@@ -25,6 +25,7 @@ $sources= array (
     'source_core' => $root.'core/components/versionx',
     'lexicon' => $root . 'core/components/versionx/lexicon/',
     'source_assets' => $root.'assets/components/versionx',
+	 'docs' => $root.'assets/components/versionx/docs/',
 );
 unset($root); 
 
@@ -97,11 +98,11 @@ $vehicle->resolve('file',array(
 
 $builder->putVehicle($vehicle);
 
-/*$builder->setPackageAttributes(array(
+$builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
 ));
-$modx->log(xPDO::LOG_LEVEL_INFO,'Set Package Attributes.'); flush();*/
+$modx->log(xPDO::LOG_LEVEL_INFO,'Set Package Attributes.'); flush();
 
 
 

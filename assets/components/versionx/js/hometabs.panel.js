@@ -98,7 +98,7 @@ VersionX.grid.Resources = function(config) {
 		  url: MODx.config.assets_url+'components/versionx/connector.php'
 		  ,id: 'resourcegrid'
 		  ,baseParams: { action: 'getlist' }
-		  ,fields: ["revision","fromRev","mode","time","type","contentType","pagetitle","longtitle","description","alias","link_attributes","published","pub_date","unpub_date","parent","isfolder","introtext","contentField","richtext","template","menuindex","searchable","cacheable","createdby","createdon","editedby","editedon","deleted","deletedon","deletedby","publishedon","publishedby","menutitle","donthit","haskeywords","hasmetatags","privateweb","privatemgr","content_dispo","hidemenu","class","context_key","content_type","docid","editor"]
+		  ,fields: ["revision","fromRev","mode","time","type","contentType","pagetitle","longtitle","description","alias","link_attributes","published","pub_date","unpub_date","parent","isfolder","introtext","contentField","richtext","template","menuindex","searchable","cacheable","createdby","createdon","editedby","editedon","deleted","deletedon","deletedby","publishedon","publishedby","menutitle","donthit","haskeywords","hasmetatags","privateweb","privatemgr","content_dispo","hidemenu","classKey","context_key","content_type","docid","editor"]
 		  ,paging: true
 		  ,autosave: false
 		  ,remoteSort: false
@@ -130,7 +130,7 @@ VersionX.grid.Resources = function(config) {
             ,width: 40
 			},{
             header: _('versionx.grid.class') //'Class' 
-            ,dataIndex: 'class'
+            ,dataIndex: 'classKey'
             ,sortable: true
             ,width: 100
          },{
