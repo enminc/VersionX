@@ -54,7 +54,8 @@
 		$resArray = array();
 		
 		// Fetch the userprofile matching the editedby field
-		$user = $modx->getObject('modUser',$rev->get('editedby'));
+		$user = ($rev->get('mode') == 'new') ? $modx->getObject('modUser',$rev->get('createdby')) : $modx->getObject('modUser',$rev->get('editedby'));
+		//$user = $modx->getObject('modUser',$rev->get('editedby'));
 		$userProfile = $user->getOne('Profile');
 		$name = $userProfile->get('fullname');
 		
