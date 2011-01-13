@@ -107,17 +107,17 @@ VersionX.grid.Resources = function(config) {
             header: _('versionx.grid.revNum') //'#' 
             ,dataIndex: 'revision'
             ,sortable: true
-            ,width: 20
+            ,width: 4
 			},{
 			header: _('versionx.grid.docID') //'Res. ID' 
             ,dataIndex: 'docid'
             ,sortable: true
-            ,width: 40
+            ,width: 14
          },{
 				header: _('versionx.grid.mode') 
 				,dataIndex: 'mode'
 				,sortable: true
-				,width: 40
+				,width: 14
 				,renderer: function(val, meta, record) {
 					if (val=='upd') { return 'modified'; }
 					if (val=='new') { return 'created'; }
@@ -127,23 +127,23 @@ VersionX.grid.Resources = function(config) {
             header: _('versionx.grid.fromRev') //'Prior' 
             ,dataIndex: 'fromRev'
             ,sortable: true
-            ,width: 50
+            ,width: 16
 			},{
             header: _('versionx.grid.class') //'Class' 
             ,dataIndex: 'class'
             ,sortable: true
-            ,width: 80
+            ,width: 18
          },{
             header: _('versionx.grid.time') //'Time' 
             ,dataIndex: 'time'
             ,sortable: true
-            ,width: 90
+            ,width: 18
         },{
             header: _('versionx.grid.editor') //'Editor' 
             ,dataIndex: 'editedby'
             ,sortable: true
-            ,width: 90
-        }]
+            ,width: 16
+		}]
 			,listeners: {
 				'cellcontextmenu': function(grid, row, col, eventObj){
 					var _contextMenu = new Ext.menu.Menu({
