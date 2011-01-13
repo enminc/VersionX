@@ -119,9 +119,9 @@ VersionX.grid.Resources = function(config) {
 				,sortable: true
 				,width: 55
 				,renderer: function(val, meta, record) {
-					if (val=='upd') { return 'modified'; }
-					if (val=='new') { return 'created'; }
-					if (val.substr(0,3)=='rev') { return 'restored ('+val.substr(3)+')'; }
+					if (val=='upd') { return _('versionx.grid.mode.upd'); } //'modified'; }
+					if (val=='new') { return _('versionx.grid.mode.new'); }
+					if (val.substr(0,3)=='rev') { return _('versionx.grid.mode.rev')+' ('+val.substr(3)+')'; }
 				}
 			},{
             header: _('versionx.grid.fromRev') //'Prior' 
