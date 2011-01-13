@@ -31,7 +31,8 @@ $corePath = $modx->config['core_path'].'components/versionx/';
 $modx->addPackage('versionx', $corePath.'model/');
 
 // Something's going wrong with the request... 
+//2011-01-13_smooth-graphics: removed slash for correct pathhandling
 $modx->request->handleRequest(array(
-    'processors_path' => $corePath.'processors/',
+    'processors_path' => $corePath.'processors',
     'location' => '',
 ));
