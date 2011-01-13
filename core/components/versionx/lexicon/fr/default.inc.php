@@ -37,7 +37,7 @@ $_lang[$vxp.'menuDesc'] = 'Un composant de versioning.';
 
 // CMP: Overview
 $_lang[$vxp.'overviewTitle'] = 'Panorama';
-$_lang[$vxp.'overviewDescription'] = 'VersionX enregistre toutes les modifications de ressources, chunks et snippets et offre la possibilité de restaurer une ancienne version en un clic. Dans l\'onglet Panorama vous trouverez les trois dernières versions par section. Allez sur les onglets relatifs pour plus d\'informations et d\'options.';
+$_lang[$vxp.'overviewDescription'] = 'VersionX enregistre toutes les modifications de ressources, chunks et snippets et offre la possibilité de restaurer une ancienne version en un clic. Allez sur les onglets relatifs pour plus d\'informations et d\'options.';
 $_lang[$vxp.'devTitle'] = 'Développement';
 $_lang[$vxp.'devDescription'] = 'VersionX a été développé par <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> comme composant de versioning pour <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a>.<br />
 Veuillez repporter les bugs ou bizarreries sur <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
