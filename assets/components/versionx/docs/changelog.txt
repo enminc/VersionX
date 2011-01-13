@@ -1,6 +1,8 @@
 CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha3 (to be released)
+- [#10] Remove mention of an overview from lexicons
+- [#17] Added changelog to the installer / build
 - [#13] Changed modified/created/restored values to lexicon references.
 
 VersionX 1.0 Alpha2 (Released 11/01/2011)
