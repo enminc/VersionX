@@ -117,7 +117,7 @@ VersionX.grid.Resources = function(config) {
 				header: _('versionx.grid.mode') 
 				,dataIndex: 'mode'
 				,sortable: true
-				,width: 55
+				,width: 40
 				,renderer: function(val, meta, record) {
 					if (val=='upd') { return 'modified'; }
 					if (val=='new') { return 'created'; }
@@ -127,22 +127,22 @@ VersionX.grid.Resources = function(config) {
             header: _('versionx.grid.fromRev') //'Prior' 
             ,dataIndex: 'fromRev'
             ,sortable: true
-            ,width: 40
+            ,width: 50
 			},{
             header: _('versionx.grid.class') //'Class' 
             ,dataIndex: 'class'
             ,sortable: true
-            ,width: 100
+            ,width: 80
          },{
             header: _('versionx.grid.time') //'Time' 
             ,dataIndex: 'time'
             ,sortable: true
-            ,width: 100
+            ,width: 90
         },{
             header: _('versionx.grid.editor') //'Editor' 
             ,dataIndex: 'editedby'
             ,sortable: true
-            ,width: 100
+            ,width: 90
         }]
 			,listeners: {
 				'cellcontextmenu': function(grid, row, col, eventObj){
