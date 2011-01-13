@@ -19,3 +19,16 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  */
+ 
+VersionX is a basic versioning Add-on for the MODx CMF. It keeps track of changes
+to resources, and starting in VersionX 1.1, also chunks and snippets. 
+
+Versioning is a much requested feature which is what sparked the development of this
+addon. Please check out the information linked to on the Wiki for more information
+about this project and please file issues if there is anything you come across.
+
+To install from github, modify the _build/build.config.php file to reference your 
+folder structure, run the build script and find the package in core/packages. Then
+you can go into the Package Manager, search locally for packages and install.
+
+Thanks for using this addon!
