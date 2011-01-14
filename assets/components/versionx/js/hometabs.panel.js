@@ -226,11 +226,15 @@ function resourcewindow(g, eventObj, row) {
 				title: _('versionx.detailwindow.basictab') //'Basic Fields'
 				,cls: 'modx-panel'
 				,bodyStyle: 'padding: 10px'
-				,html: '<table><tr><td width="120px">Template</td><td>'+gridrecord.template+'</td></tr><tr><td>Pagetitle</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>Longtitle</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>Description</td><td>'+gridrecord.description+'</td></tr><tr><td>Alias</td><td>'+gridrecord.alias+'</td></tr><tr><td>Link attributes</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>Introtext</td><td>'+gridrecord.introtext+'</td></tr><tr><td>Parent</td><td>'+gridrecord.parent+'</td></tr><tr><td>Menutitle</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>Menu index</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>Hide from menu</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table><h3>Content</h3><blockquote style="padding: 10px;">'+gridrecord.contentField+'</blockquote>'
+				,html: '<table><tr><td width="120px">Template</td><td>'+gridrecord.template+'</td></tr><tr><td>Pagetitle</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>Longtitle</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>Description</td><td>'+gridrecord.description+'</td></tr><tr><td>Alias</td><td>'+gridrecord.alias+'</td></tr><tr><td>Link attributes</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>Introtext</td><td>'+gridrecord.introtext+'</td></tr><tr><td>Parent</td><td>'+gridrecord.parent+'</td></tr><tr><td>Menutitle</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>Menu index</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>Hide from menu</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table>'
 			},{
 				title: _('versionx.detailwindow.settingstab') //'Settings'
 				,bodyStyle: 'padding: 10px'
 				,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.classKey+'</td></tr></table>'
+			},{
+				title: _('versionx.detailwindow.contenttab') //'Settings'
+				,bodyStyle: 'padding: 10px'
+				,html: gridrecord.contentField
 			}]
 		}] 
 	});

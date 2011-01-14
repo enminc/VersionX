@@ -49,6 +49,7 @@ $_lang[$vxp.'resourcesDescription'] = 'VersionX takes note of your most valuable
 $_lang[$vxp.'detailwindow.title'] = 'Resource Revision ';
 $_lang[$vxp.'detailwindow.basictab'] = 'Basic Fields';
 $_lang[$vxp.'detailwindow.settingstab'] = 'Settings';
+$_lang[$vxp.'detailwindow.contenttab'] = 'Content'; // New 14/1/2011
 
 //// Resource compare window
 //$_lang[$vxp.'resources.comparewindow.title'] = ''; 
