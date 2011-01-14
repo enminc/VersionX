@@ -1,6 +1,8 @@
 CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha3 (to be released)
+- [#13] Added a few more lexicon strings, improved some error handling, improved code readability
+- [#4/#6/#14] Updated grid list processor for usability (date formatting, boolean is now yes/no, editedby (and similar) now gives users full name, template shows template name..
 - [#11] Increased width of modal windows. Moved content to its own tab in view details window.
 - [#10] Rewrote processor request for restore to make it functional again.
 - Renamed processor files to lowercase to prevent it from failing.
