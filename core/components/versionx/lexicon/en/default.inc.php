@@ -88,4 +88,7 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Restore revision';
 $_lang[$vxp.'grid.restoreMsg'] = 'Are you sure you want to revert the resource to the selected revision?';
 $_lang[$vxp.'grid.restore.done'] = 'The specified revision has been restored.';
 
+// CMP: Error messages
+$_lang[$vxp.'error.idnotfound'] = 'Unable to locate revision ID. Your revisions table may be corrupt.';
+$_lang[$vxp.'error.requestfailed'] = 'Loading the required data failed. Please check your connection.';
 ?>

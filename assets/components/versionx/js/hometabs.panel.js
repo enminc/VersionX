@@ -167,26 +167,27 @@ VersionX.grid.Resources = function(config) {
 									var pGrid = Ext.ComponentMgr.get('resourcegrid'); //ID as specified in the gridPanel config
 									var gridrecord = pGrid.getSelectionModel().getSelected().json;
 									var x = gridrecord.revision;
-									if (x==undefined) { x = 'Error, please try again'; }
-									conn.request({
-										url: MODx.config.assets_url+'components/versionx/connector.php', 
-										method: 'POST',
-										params: { action: 'restorerevision', revision: x },
-										success: function(responseObject) {
-											var returned = responseObject.responseText;
-											if (returned == 'OK') {
-												window.alert(_('versionx.grid.restore.done'));
-												window.location.reload(true);
+									if (x==undefined) { window.alert(_('versionx.error.idnotfound')); }
+									else { 
+										conn.request({
+											url: MODx.config.assets_url+'components/versionx/connector.php', 
+											method: 'POST',
+											params: { action: 'restorerevision', revision: x },
+											success: function(responseObject) {
+												var returned = responseObject.responseText;
+												if (returned == 'OK') {
+													window.alert(_('versionx.grid.restore.done'));
+													window.location.reload(true);
+												}
+											},
+											failure: function() {
+												window.alert(_('versionx.error.requestfailed'));
 											}
-											//window.alert(responseObject.responseText); 
-										},
-										failure: function() {
-											window.alert('Oops. Unable to restore the revision (ajax failure).');
-										}
-									});
+										});
+									}
 								}
 								else{
-									// User pressed no.
+									// User pressed no or canceled: do nothing
 								}
 							 });
 							}
@@ -205,112 +206,124 @@ function resourcewindow(g, eventObj, row) {
 	var pGrid = Ext.ComponentMgr.get('resourcegrid'); //ID as specified in the gridPanel config
 	var gridrecord = pGrid.getSelectionModel().getSelected().json;
 	var x = gridrecord.revision;
-	if (x==undefined) { x = 'Error, please try again'; }
-	if (win) { win.close(); }
-	var win = new Ext.Window({
-		title: _('versionx.detailwindow.title') //'Resource Revision '+x
-		,closeable: true
-		,closeAction: 'close'
-		,id: 'resourcewindow'
-		,hidden: false
-		,resizable: false
-		,renderTo: 'viewdetails-window'
-		,width: 800 // Width required to properly display tabs in the window
-		,autoHeight: true
-
-		,items: [{
-			xtype: 'modx-tabs'
-			,bodyStyle: 'padding: 10px'
-			,defaults: { border: false }
+	if (x==undefined) { window.alert(_('versionx.error.idnotfound')); }
+	else {
+		if (win) { win.close(); }
+		var win = new Ext.Window({
+			title: _('versionx.detailwindow.title') //'Resource Revision '+x
+			,closeable: true
+			,closeAction: 'close'
+			,id: 'resourcewindow'
+			,hidden: false
+			,resizable: false
+			,renderTo: 'viewdetails-window'
+			,width: 800 // Width required to properly display tabs in the window
+			,autoHeight: true
+			
+			// The below needs to be lexicon-ified still!
 			,items: [{
-				title: _('versionx.detailwindow.basictab') //'Basic Fields'
-				,cls: 'modx-panel'
+				xtype: 'modx-tabs'
 				,bodyStyle: 'padding: 10px'
-				,html: '<table><tr><td width="120px">Template</td><td>'+gridrecord.template+'</td></tr><tr><td>Pagetitle</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>Longtitle</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>Description</td><td>'+gridrecord.description+'</td></tr><tr><td>Alias</td><td>'+gridrecord.alias+'</td></tr><tr><td>Link attributes</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>Introtext</td><td>'+gridrecord.introtext+'</td></tr><tr><td>Parent</td><td>'+gridrecord.parent+'</td></tr><tr><td>Menutitle</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>Menu index</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>Hide from menu</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table>'
-			},{
-				title: _('versionx.detailwindow.settingstab') //'Settings'
-				,bodyStyle: 'padding: 10px'
-				,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.classKey+'</td></tr></table>'
-			},{
-				title: _('versionx.detailwindow.contenttab') //'Settings'
-				,bodyStyle: 'padding: 10px'
-				,html: gridrecord.contentField
-			}]
-		}] 
-	});
+				,defaults: { border: false }
+				,items: [{
+					title: _('versionx.detailwindow.basictab') //'Basic Fields'
+					,cls: 'modx-panel'
+					,bodyStyle: 'padding: 10px'
+					,html: '<table><tr><td width="120px">Template</td><td>'+gridrecord.template+'</td></tr><tr><td>Pagetitle</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>Longtitle</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>Description</td><td>'+gridrecord.description+'</td></tr><tr><td>Alias</td><td>'+gridrecord.alias+'</td></tr><tr><td>Link attributes</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>Introtext</td><td>'+gridrecord.introtext+'</td></tr><tr><td>Parent</td><td>'+gridrecord.parent+'</td></tr><tr><td>Menutitle</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>Menu index</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>Hide from menu</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table>'
+				},{
+					title: _('versionx.detailwindow.settingstab') //'Settings'
+					,bodyStyle: 'padding: 10px'
+					,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.classKey+'</td></tr></table>'
+				},{
+					title: _('versionx.detailwindow.contenttab') //'Settings'
+					,bodyStyle: 'padding: 10px'
+					,html: gridrecord.contentField
+				}]
+			}] 
+		});
+	}
 }
 function comparewindow(g, eventObj, row) {
 	var pGrid = Ext.ComponentMgr.get('resourcegrid'); //ID as specified in the gridPanel config
 	var gridrecord = pGrid.getSelectionModel().getSelected().json;
 	var newRev = gridrecord.revision;
-	if (newRev==undefined) { newRev = 'Error, please try again'; }
-	var old = gridrecord.fromRev;
-	if (win) { win.close(); }
-	var win = new Ext.Window({
-		title: 'Comparing Revision '+newRev+' and '+old // @ LEXICON
-		,closeable: true
-		,closeAction: 'close'
-		,id: 'comparewindow'
-		,hidden: false
-		,resizable: false
-		,renderTo: 'viewdetails-window'
-		,width: 800 // Width required to properly display tabs in the window
-		,autoHeight: true
+	if (newRev==undefined) { window.alert(_('versionx.error.idnotfound')); }
+	else {
+		var old = gridrecord.fromRev;
+		if (old==undefined) { window.alert(_('versionx.error.idnotfound')); }
+		else {
+			if (win) { win.close(); }
+			var win = new Ext.Window({
+				title: 'Comparing Revision '+newRev+' and '+old // @ LEXICON
+				,closeable: true
+				,closeAction: 'close'
+				,id: 'comparewindow'
+				,hidden: false
+				,resizable: false
+				,renderTo: 'viewdetails-window'
+				,width: 800 // Width required to properly display tabs in the window
+				,autoHeight: true
 
-		,items: [{
-			xtype: 'modx-tabs'
-			,bodyStyle: 'padding: 10px'
-			,defaults: { border: false }
-			,items: [{
-				title: _('versionx.comparewindow.fieldstab') //'Fields &amp; settings'
-				,cls: 'modx-panel'
-				,bodyStyle: 'padding: 10px'
-				,xtype: 'versionx-grid-resources-compare'	
-			},{
-				title: _('versionx.comparewindow.contenttab') //'Content'
-				,cls: 'modx-panel'
-				,bodyStyle: 'padding: 10px'
-				,xtype: 'versionx-grid-resources-compare-content'
-			}]
-		}] 
-	});
+				,items: [{
+					xtype: 'modx-tabs'
+					,bodyStyle: 'padding: 10px'
+					,defaults: { border: false }
+					,items: [{
+						title: _('versionx.comparewindow.fieldstab') //'Fields &amp; settings'
+						,cls: 'modx-panel'
+						,bodyStyle: 'padding: 10px'
+						,xtype: 'versionx-grid-resources-compare'	
+					},{
+						title: _('versionx.comparewindow.contenttab') //'Content'
+						,cls: 'modx-panel'
+						,bodyStyle: 'padding: 10px'
+						,xtype: 'versionx-grid-resources-compare-content'
+					}]
+				}] 
+			});
+		}
+	}
 }
 VersionX.grid.Resources.Compare = function(config) {
 	var pGrid = Ext.ComponentMgr.get('resourcegrid'); //ID as specified in the gridPanel config
 	var gridrecord = pGrid.getSelectionModel().getSelected().json;
 	var newRev = gridrecord.revision;
-	if (newRev==undefined) { newRev = 'Error, please try again'; }
-	var fromRev = gridrecord.fromRev;
-	
-    config = config || {};
-    Ext.applyIf(config,{
-        url: MODx.config.assets_url+'components/versionx/connector.php'
-		  ,id: 'resourcecomparegrid'
-		  ,baseParams: { 'action': 'compareresources', 'old': fromRev, 'new': newRev }
-        ,fields: ["field","oldvalue","newvalue"]
-        ,paging: false
-        ,autosave: false
-        ,remoteSort: false
-        ,primaryKey: 'field'
-        ,columns: [{
-            header: _('versionx.comparewindow.fields.field')  
-            ,dataIndex: 'field'
-            ,sortable: true
-            ,width: 60
-        },{
-            header: _('versionx.comparewindow.fields.old')+' (R'+fromRev+')'
-            ,dataIndex: 'oldvalue'
-            ,sortable: true
-            ,width: 100
-				,forcefit: true
-        },{
-            header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')' 
-            ,dataIndex: 'newvalue'
-            ,sortable: true
-				,forcefit: true
-        }]
-    });
-    VersionX.grid.Resources.Compare.superclass.constructor.call(this,config);
+	if (newRev==undefined) { window.alert(_('versionx.error.idnotfound')); }
+	else {
+		var fromRev = gridrecord.fromRev;
+		if (fromRev==undefined) { window.alert(_('versionx.error.idnotfound')); }
+		else {
+			config = config || {};
+			Ext.applyIf(config,{
+				url: MODx.config.assets_url+'components/versionx/connector.php'
+				,id: 'resourcecomparegrid'
+				,baseParams: { 'action': 'compareresources', 'old': fromRev, 'new': newRev }
+				,fields: ["field","oldvalue","newvalue"]
+				,paging: false
+				,autosave: false
+				,remoteSort: false
+				,primaryKey: 'field'
+				,columns: [{
+					header: _('versionx.comparewindow.fields.field')  
+					,dataIndex: 'field'
+					,sortable: true
+					,width: 60
+				},{
+					header: _('versionx.comparewindow.fields.old')+' (R'+fromRev+')'
+					,dataIndex: 'oldvalue'
+					,sortable: true
+					,width: 100
+					,forcefit: true
+				},{
+					header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')' 
+					,dataIndex: 'newvalue'
+					,sortable: true
+					,forcefit: true
+				}]
+			});
+			VersionX.grid.Resources.Compare.superclass.constructor.call(this,config);
+		}
+	}
 };
 Ext.extend(VersionX.grid.Resources.Compare,MODx.grid.Grid);
 Ext.reg('versionx-grid-resources-compare',VersionX.grid.Resources.Compare);
@@ -321,37 +334,41 @@ VersionX.grid.Resources.CompareContent = function(config) {
 	var pGrid = Ext.ComponentMgr.get('resourcegrid'); //ID as specified in the gridPanel config
 	var gridrecord = pGrid.getSelectionModel().getSelected().json;
 	var newRev = gridrecord.revision;
-	if (newRev==undefined) { newRev = 'Error, please try again'; }
-	var fromRev = gridrecord.fromRev;
-	
-    config = config || {};
-    Ext.applyIf(config,{
-        url: MODx.config.assets_url+'components/versionx/connector.php'
-		  ,id: 'resourcecomparecontentgrid'
-		  ,baseParams: { action: 'compareresourcescontent', 'old': fromRev, 'new': newRev }
-        ,fields: ["oldvalue","newvalue","change"]
-        ,paging: false
-        ,autosave: false
-        ,remoteSort: false
-        ,primaryKey: 'oldvalue'
-        ,columns: [{
-				header: _('versionx.comparewindow.fields.change')
-				,dataIndex: 'change'
-				,sortable: true
-			},{
-            header: _('versionx.comparewindow.fields.old')+' (R'+newRev+')'
-            ,dataIndex: 'oldvalue'
-            ,sortable: true
-				,forceFit: true
-            ,width: 100
-        },{
-            header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')'
-            ,dataIndex: 'newvalue'
-            ,sortable: true
-				,forceFit: true
-        }]
-    });
-    VersionX.grid.Resources.CompareContent.superclass.constructor.call(this,config);
+	if (newRev==undefined) { window.alert(_('versionx.error.idnotfound')); }
+	else {
+		var fromRev = gridrecord.fromRev;
+		if (fromRev==undefined) { window.alert(_('versionx.error.idnotfound')); }
+		else {
+			config = config || {};
+			Ext.applyIf(config,{
+				url: MODx.config.assets_url+'components/versionx/connector.php'
+				,id: 'resourcecomparecontentgrid'
+				,baseParams: { action: 'compareresourcescontent', 'old': fromRev, 'new': newRev }
+				,fields: ["oldvalue","newvalue","change"]
+				,paging: false
+				,autosave: false
+				,remoteSort: false
+				,primaryKey: 'oldvalue'
+				,columns: [{
+					header: _('versionx.comparewindow.fields.change')
+					,dataIndex: 'change'
+					,sortable: true
+				},{
+					header: _('versionx.comparewindow.fields.old')+' (R'+newRev+')'
+					,dataIndex: 'oldvalue'
+					,sortable: true
+					,forceFit: true
+					,width: 100
+				},{
+					header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')'
+					,dataIndex: 'newvalue'
+					,sortable: true
+					,forceFit: true
+				  }]
+			});
+		}
+	}
+   VersionX.grid.Resources.CompareContent.superclass.constructor.call(this,config);
 };
 Ext.extend(VersionX.grid.Resources.CompareContent,MODx.grid.Grid);
 Ext.reg('versionx-grid-resources-compare-content',VersionX.grid.Resources.CompareContent);

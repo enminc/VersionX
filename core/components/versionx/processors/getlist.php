@@ -109,7 +109,7 @@
 		// Render boolean values (0,1) as yes or no
 		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo', 'hidemenu');
 		foreach ($boolFields as $fld) {
-			$resArray[$fld] = ($resArray[$fld] > 0) ? 'yes' : 'no';
+			$resArray[$fld] = ($resArray[$fld] > 0) ? 'Yes' : 'No'; // Lexicon-ify
 		}
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format
