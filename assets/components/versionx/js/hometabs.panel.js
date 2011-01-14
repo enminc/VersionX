@@ -215,7 +215,7 @@ function resourcewindow(g, eventObj, row) {
 		,hidden: false
 		,resizable: false
 		,renderTo: 'viewdetails-window'
-		,width: 500 // Width required to properly display tabs in the window
+		,width: 800 // Width required to properly display tabs in the window
 		,autoHeight: true
 
 		,items: [{
@@ -254,7 +254,7 @@ function comparewindow(g, eventObj, row) {
 		,hidden: false
 		,resizable: false
 		,renderTo: 'viewdetails-window'
-		,width: 600 // Width required to properly display tabs in the window
+		,width: 800 // Width required to properly display tabs in the window
 		,autoHeight: true
 
 		,items: [{

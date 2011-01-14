@@ -1,6 +1,7 @@
 CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha3 (to be released)
+- [#11] Increased width of modal windows. Moved content to its own tab in view details window.
 - [#10] Rewrote processor request for restore to make it functional again.
 - Renamed processor files to lowercase to prevent it from failing.
 - [#15] Removed slash for better path handling (smooth-graphics)
