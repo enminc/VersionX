@@ -49,22 +49,55 @@
 	// Fetch items
 	$revisions = $modx->getCollection('Versionx', $c);
 	$list = array();
+	
+	$userID = array(); // Will be used to "cache" the userIDs and their names.
+	
 	foreach ($revisions as $rev) {
-		// (re)set the array for info
+		// Set an empty array to hold the data for this revision.
 		$resArray = array();
 		
-		// Fetch the userprofile matching the editedby field
+		// Fetch all data
+		$resArray = $rev->toArray();
+		// Start processing fields in the $rev object.
+		// First process the fields with user IDs.
+		$userfields = array('createdby', 'editedby', 'publishedby', 'deletedby');
+		foreach ($userfields as $x => $uf) {
+			if ($rev->get($uf) > 0) {
+				$uid = $rev->get($uf); 
+				if (!empty($userID['u'.$uid])) { 
+					$resArray[$uf] = $userID['u'.$uid];
+				}
+				else {
+					$u = $modx->getObject('modUser',$uid);
+					if (!$u) { // No user found with that ID
+						$resArray[$uf] = 'User ID '.$uid.' not found';
+						$userID['u'.$uid] = 'User ID '.$uid.' not found';
+					} else {
+						$up = $u->getOne('Profile');
+						$ufn = $up->get('fullname').' ('.$uid.')';
+						$resArray[$uf] = $ufn;
+						$userID['u'.$uid] = $ufn;
+					}
+				}
+			}
+			else {
+				$resArray[$uf] = '-';
+			}
+		}
+		// As editedby is viewed in the grid, make sure to set editedby to createdby on a new resource.
+		if ($rev->get('mode') == 'new') {
+			$resArray['editedby'] = $resArray['createdby'];
+		}
+		
+		/*// Fetch the userprofile matching the editedby field
 		$user = ($rev->get('mode') == 'new') ? $modx->getObject('modUser',$rev->get('createdby')) : $modx->getObject('modUser',$rev->get('editedby'));
 		//$user = $modx->getObject('modUser',$rev->get('editedby'));
 		$userProfile = $user->getOne('Profile');
-		$name = $userProfile->get('fullname');
+		$name = $userProfile->get('fullname');*/
 		
-		// Fetch all fields in an array
-		$resArray = $rev->toArray();
 		// Make some modifications for proper rendering in modext
 		$resArray['docid'] = $resArray['id']; 	unset ($resArray['id']); // "id" is rendered as unique in modExt
 		$resArray['time'] = date($dateFormat,$rev->get('time')); // Format the time in php
-		$resArray['editedby'] = $name; // Replace the user id with the fullname from the db, collected above
 		$resArray['fromRev'] = ($resArray['fromRev'] > 0) ? $resArray['fromRev'] : '';  // If fromRev = 0, set it to ''
 		$resArray['contentField'] = nl2br($resArray['contentField']); // To show line breaks in the revision
 		$resArray['classKey'] = $resArray['class']; unset($resArray['class']); // IE breaks on "class".
