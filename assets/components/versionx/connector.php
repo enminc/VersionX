@@ -30,9 +30,14 @@ $corePath = $namespace->get('path');
 
 $modx->addPackage('versionx', $corePath.'model/');
 
-// Something's going wrong with the request... 
-//2011-01-13_smooth-graphics: removed slash for correct pathhandling
-$modx->request->handleRequest(array(
-    'processors_path' => $corePath.'processors',
-    'location' => '',
-));
+// The restorerevision processor seems to run into issues when processed with handleRequest, so handle it manually.
+$action = (string) $_POST['action'];
+if ($action == 'restorerevision') {
+	include_once($corePath.'processors/restorerevision.php');
+	}
+else { 
+	$modx->request->handleRequest(array(
+		 'processors_path' => $corePath.'processors',
+		 'location' => '',
+	));
+}

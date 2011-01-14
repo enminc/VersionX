@@ -1,7 +1,9 @@
 CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha3 (to be released)
+- [#10] Rewrote processor request for restore to make it functional again.
 - Renamed processor files to lowercase to prevent it from failing.
+- [#15] Removed slash for better path handling (smooth-graphics)
 - [#9/#15] Better distribution of columns in main grid (smooth-graphics)
 - [#10] Remove mention of an overview from lexicons
 - [#17] Added changelog to the installer / build
