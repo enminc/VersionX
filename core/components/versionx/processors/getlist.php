@@ -33,7 +33,7 @@
 	$limit = $modx->getOption('limit',$scriptProperties,20);
 	$sort = $modx->getOption('sort',$scriptProperties,'revision');
 	$dir = $modx->getOption('dir',$scriptProperties,'DESC');
-	$dateFormat = $modx->getOption('dateformat',$scriptProperties,'D j M, Y G:i');
+	$dateFormat = $modx->getOption('dateformat',$scriptProperties,$modx->getOption('manager_date_format').' '.$modx->getOption('manager_time_format'));
 
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
@@ -84,23 +84,46 @@
 				$resArray[$uf] = '-';
 			}
 		}
-		// As editedby is viewed in the grid, make sure to set editedby to createdby on a new resource.
+		// As editedby is viewed in the grid, make sure to set editedby to createdby on a new resource
 		if ($rev->get('mode') == 'new') {
 			$resArray['editedby'] = $resArray['createdby'];
 		}
 		
-		/*// Fetch the userprofile matching the editedby field
-		$user = ($rev->get('mode') == 'new') ? $modx->getObject('modUser',$rev->get('createdby')) : $modx->getObject('modUser',$rev->get('editedby'));
-		//$user = $modx->getObject('modUser',$rev->get('editedby'));
-		$userProfile = $user->getOne('Profile');
-		$name = $userProfile->get('fullname');*/
+		// Display the template name
+		$tpl = $resArray['template'];
+		$tplObj = $modx->getObject('modTemplate',$tpl);
+		if (!$tplObj) { $resArray['template'] = 'Not found.'; }
+		else { $resArray['template'] = $tplObj->get('templatename').' ('.$tpl.')'; }
 		
-		// Make some modifications for proper rendering in modext
-		$resArray['docid'] = $resArray['id']; 	unset ($resArray['id']); // "id" is rendered as unique in modExt
-		$resArray['time'] = date($dateFormat,$rev->get('time')); // Format the time in php
-		$resArray['fromRev'] = ($resArray['fromRev'] > 0) ? $resArray['fromRev'] : '';  // If fromRev = 0, set it to ''
-		$resArray['contentField'] = nl2br($resArray['contentField']); // To show line breaks in the revision
-		$resArray['classKey'] = $resArray['class']; unset($resArray['class']); // IE breaks on "class".
+		// Display the parent's resource_tree_node_name
+		$parent = $resArray['parent'];
+		if ($parent > 0) {
+			$parObj = $modx->getObject('modResource',$parent);
+			if ($parObj) { $resArray['parent'] = $parObj->get($modx->getOption('resource_tree_node_name')); }
+		} 
+		
+		// "id" is rendered as unique in extjs, so change the id field to docid
+		$resArray['docid'] = $resArray['id']; 	
+		unset ($resArray['id']); 
+		
+		// Render boolean values (0,1) as yes or no
+		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo', 'hidemenu');
+		foreach ($boolFields as $fld) {
+			$resArray[$fld] = ($resArray[$fld] > 0) ? 'yes' : 'no';
+		}
+		
+		// Format the time, using $dateFormat which is set to the manager date + time format
+		$resArray['time'] = date($dateFormat,$rev->get('time')); 
+		
+		// If fromRev = 0, set it to '' (empty string)
+		$resArray['fromRev'] = ($resArray['fromRev'] > 0) ? $resArray['fromRev'] : '';  
+		
+		// To show line breaks in the revision. 
+		$resArray['contentField'] = nl2br($resArray['contentField']); 
+		
+		// JS breaks on the use of "class", so change the field name to return.
+		$resArray['classKey'] = $resArray['class']; 
+		unset($resArray['class']); 
 		
 		$list[] = $resArray;
 	}
