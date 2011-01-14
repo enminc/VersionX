@@ -171,7 +171,7 @@ VersionX.grid.Resources = function(config) {
 									conn.request({
 										url: MODx.config.assets_url+'components/versionx/connector.php', 
 										method: 'POST',
-										params: { action: 'restoreRevision', revision: x },
+										params: { action: 'restorerevision', revision: x },
 										success: function(responseObject) {
 											var returned = responseObject.responseText;
 											if (returned == 'OK') {
@@ -261,7 +261,6 @@ function comparewindow(g, eventObj, row) {
 				title: _('versionx.comparewindow.fieldstab') //'Fields &amp; settings'
 				,cls: 'modx-panel'
 				,bodyStyle: 'padding: 10px'
-				//,html: 'The grid below displays differences between the new and old revision. Please see the other tab for a line-per-line comparison of the content.'
 				,xtype: 'versionx-grid-resources-compare'	
 			},{
 				title: _('versionx.comparewindow.contenttab') //'Content'
@@ -280,20 +279,17 @@ VersionX.grid.Resources.Compare = function(config) {
 	var fromRev = gridrecord.fromRev;
 	
     config = config || {};
-    //this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.assets_url+'components/versionx/connector.php'
-		  //url: '../core/components/versionx/processors/mgr/hometabs/compareResources.php'
 		  ,id: 'resourcecomparegrid'
-		  ,baseParams: { 'action': 'compareResources', 'old': fromRev, 'new': newRev }
+		  ,baseParams: { 'action': 'compareresources', 'old': fromRev, 'new': newRev }
         ,fields: ["field","oldvalue","newvalue"]
         ,paging: false
         ,autosave: false
         ,remoteSort: false
         ,primaryKey: 'field'
-        //,sm: this.sm // Checkbox selection model
         ,columns: [{
-            header: _('versionx.comparewindow.fields.field') //'Field' 
+            header: _('versionx.comparewindow.fields.field')  
             ,dataIndex: 'field'
             ,sortable: true
             ,width: 60
@@ -308,7 +304,6 @@ VersionX.grid.Resources.Compare = function(config) {
             ,dataIndex: 'newvalue'
             ,sortable: true
 				,forcefit: true
-            //,width: 100
         }]
     });
     VersionX.grid.Resources.Compare.superclass.constructor.call(this,config);
@@ -326,17 +321,15 @@ VersionX.grid.Resources.CompareContent = function(config) {
 	var fromRev = gridrecord.fromRev;
 	
     config = config || {};
-    //this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.assets_url+'components/versionx/connector.php'
 		  ,id: 'resourcecomparecontentgrid'
-		  ,baseParams: { action: 'compareResourcesContent', 'old': fromRev, 'new': newRev }
+		  ,baseParams: { action: 'compareresourcescontent', 'old': fromRev, 'new': newRev }
         ,fields: ["oldvalue","newvalue","change"]
         ,paging: false
         ,autosave: false
         ,remoteSort: false
         ,primaryKey: 'oldvalue'
-        //,sm: this.sm // Checkbox selection model
         ,columns: [{
 				header: _('versionx.comparewindow.fields.change')
 				,dataIndex: 'change'
@@ -352,7 +345,6 @@ VersionX.grid.Resources.CompareContent = function(config) {
             ,dataIndex: 'newvalue'
             ,sortable: true
 				,forceFit: true
-            //,width: 100
         }]
     });
     VersionX.grid.Resources.CompareContent.superclass.constructor.call(this,config);
