@@ -50,6 +50,7 @@ $_lang[$vxp.'resourcesDescription'] = 'VersionX prend soin de votre bien le plus
 $_lang[$vxp.'detailwindow.title'] = 'Version de la ressource';
 $_lang[$vxp.'detailwindow.basictab'] = 'Champs basics';
 $_lang[$vxp.'detailwindow.settingstab'] = 'Propriétés';
+$_lang[$vxp.'detailwindow.contenttab'] = 'Contenu'; // New 14/1/2011
 
 //// Resource compare window
 //$_lang[$vxp.'resources.comparewindow.title'] = ''; 
@@ -66,7 +67,7 @@ $_lang[$vxp.'chunksDescription']  = 'Objects which can be used globally are bett
 
 // CMP: Snippets
 $_lang[$vxp.'snippetsTitle'] = 'Snippets';
-$_lang[$vxp.'snippetsDescription'] = 'Ever had a working snippet that changed after making a change? Revert easily with VersionX.';
+$_lang[$vxp.'snippetsDescription'] = 'Déjà eu un snippet qui ne fonctionnait plus après avoir effectué un changement? Retournez facilement à la version précédente avec VersionX.';
 
 // CMP: Grid headings
 $_lang[$vxp.'grid.revNum'] = '#';
@@ -88,4 +89,7 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Restorer la version';
 $_lang[$vxp.'grid.restoreMsg'] = 'Êtes-vous sûr de vouloir remplacer la ressource par la version sélectionnée?';
 $_lang[$vxp.'grid.restore.done'] = 'La version a été restorée.';
 
+// CMP: Error messages (New 14/1/2011)
+$_lang[$vxp.'error.idnotfound'] = 'Impossible de trouver la révision. Votre table de révisions doit être corrompue.';
+$_lang[$vxp.'error.requestfailed'] = 'Chargement des données requises échoué. Veuillez vérifier votre connection.';
 ?>
