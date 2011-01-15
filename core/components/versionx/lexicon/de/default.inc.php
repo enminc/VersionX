@@ -87,4 +87,8 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Version wiederherstellen';
 $_lang[$vxp.'grid.restoreMsg'] = 'Sind Sie sicher, dass Sie diese Ressource mit der gewählten (evtl. veralteten) Version ersetzen möchten?';
 $_lang[$vxp.'grid.restore.done'] = 'Die ausgewählte Version wurde wiederhergestellt.';
 
+// CMP: Error messages (New 14/1/2011)
+$_lang[$vxp.'error.idnotfound'] = 'Konnte Versions-ID nicht finden. Die Versionstabelle könnte beschädigt sein.';
+$_lang[$vxp.'error.requestfailed'] = 'Laden der benötigten Daten fehlgeschlagen! Bitte prüfen Sie Ihre Verbindung.';
+
 ?>
